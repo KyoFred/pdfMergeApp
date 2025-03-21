@@ -1,5 +1,7 @@
 {
-  "name": "client",
+  "name": "document-merger",
+  "description": "Document Merger project pdf",
+  "author": "Fred H.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

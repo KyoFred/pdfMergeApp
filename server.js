@@ -11,13 +11,20 @@ const libreConvert = promisify(libre.convert);
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : false
+}));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 app.use('/merged', express.static('merged'));
+
+// In production, serve static files from the React app
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'client/build')));
+}
 
 // Ensure directories exist
 const uploadsDir = path.join(__dirname, 'uploads');
@@ -169,6 +176,14 @@ app.get('/api/download/:filename', (req, res) => {
   });
 });
 
+// The "catchall" handler for production: for any request that doesn't
+// match one above, send back React's index.html file.
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build/index.html'));
+  });
+}
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
 });

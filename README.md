@@ -1,70 +1,127 @@
-# Getting Started with Create React App
+# Kyocera Document Merger
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Un'applicazione web moderna per unire documenti PDF, Word e immagini in un unico file PDF, sviluppata seguendo le linee guida di design Kyocera.
 
-## Available Scripts
+## Requisiti di Sistema
 
-In the project directory, you can run:
+- Node.js (versione 14 o superiore)
+- npm (Node Package Manager)
+- LibreOffice (per la conversione di documenti Word)
+- GT-Eesti-Pro font installato nel sistema
 
-### `npm start`
+## Installazione
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clona il repository:
+```bash
+git clone <repository-url>
+cd document-merger
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Installa le dipendenze del server:
+```bash
+npm install
+```
 
-### `npm test`
+3. Installa le dipendenze del client:
+```bash
+cd client
+npm install
+cd ..
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Configurazione
 
-### `npm run build`
+1. Installa LibreOffice:
+   - Scarica LibreOffice da: https://www.libreoffice.org/download/download/
+   - Esegui l'installer e segui le istruzioni di installazione
+   - **Importante**: Durante l'installazione, assicurati di selezionare l'opzione per aggiungere LibreOffice al PATH di sistema
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Verifica che la porta 5001 sia disponibile:
+   - Apri il Prompt dei Comandi come amministratore
+   - Esegui: `netstat -ano | findstr :5001`
+   - Se la porta è in uso, termina il processo o modifica la porta nel file di configurazione
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Installa il font GT-Eesti-Pro:
+   - Apri il pannello di controllo di Windows
+   - Vai su "Aspetto e personalizzazione" > "Caratteri"
+   - Trascina i file del font GT-Eesti-Pro nella finestra dei caratteri
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Avvio dell'Applicazione
 
-### `npm run eject`
+### Modalità Sviluppo
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Avvia il server e il client in modalità sviluppo:
+```bash
+npm run dev-full
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. L'applicazione sarà accessibile all'indirizzo: http://localhost:5001
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Modalità Produzione
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Costruisci l'applicazione client:
+```bash
+npm run build
+```
 
-## Learn More
+2. Avvia il server:
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. L'applicazione sarà accessibile all'indirizzo: http://localhost:5001
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Funzionalità
 
-### Code Splitting
+- Caricamento di documenti multipli (PDF, Word, immagini)
+- Interfaccia drag & drop per il caricamento dei file
+- Unione di documenti in un unico PDF
+- Download del file PDF unito
+- Design moderno e responsive seguendo le linee guida Kyocera:
+  - Colori ufficiali Kyocera:
+    - Blu primario (#0a9bcd): Utilizzato per pulsanti e accenti interattivi
+    - Rosso brand (#e60012): Utilizzato per elementi del brand
+    - Verde successo (#28a745): Utilizzato per conferme e completamenti
+    - Grigio secondario (#333333): Utilizzato per testo e UI secondaria
+  - Tipografia GT-Eesti-Pro:
+    - Titoli (l-hero__title): 2.5rem, peso 300, colore blu
+    - Sottotitoli (l-section__title): 2rem, peso 300
+    - Testo corpo: 1.5rem, peso 400
+    - Tutti i pulsanti: Maiuscolo, peso 400
+  - Layout:
+    - Spaziatura sezioni: 2rem uniforme
+    - Bordi arrotondati: 4px per card e pulsanti
+    - Linee di accento blu: 4px sotto i titoli
+    - Logo Kyocera: 147x32 pixel
+  - Elementi interattivi:
+    - Pulsanti con effetti hover e ombreggiature
+    - File items con animazioni di rimozione
+    - Stati di caricamento con spinner animati
+    - Feedback visivo per drag & drop
+- Supporto per i seguenti formati:
+  - PDF (.pdf)
+  - Word (.doc, .docx)
+  - Text (.txt, .rtf)
+  - OpenDocument (.odt)
+  - Immagini (.jpg, .jpeg, .png, .gif, .bmp)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Limiti
 
-### Analyzing the Bundle Size
+- Dimensione massima file: 10MB per file
+- Numero massimo di file: 10 per unione
+- Risoluzione minima schermo consigliata: 1024x768
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Risoluzione Problemi
 
-### Making a Progressive Web App
+1. Se ricevi un errore durante la conversione dei documenti Word:
+   - Verifica che LibreOffice sia installato correttamente
+   - Riavvia l'applicazione dopo l'installazione di LibreOffice
+   - Assicurati che LibreOffice sia nel PATH di sistema
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. Se il font non viene caricato correttamente:
+   - Verifica che il font GT-Eesti-Pro sia installato a livello di sistema
+   - Riavvia il browser dopo l'installazione del font
 
-### Advanced Configuration
+## Supporto
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Per problemi tecnici o domande sull'applicazione, contattare il supporto tecnico Kyocera.

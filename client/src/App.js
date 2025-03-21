@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = '/api';  // Using relative path since client is served by the same server
 
 function App() {
   const [files, setFiles] = useState([]);
