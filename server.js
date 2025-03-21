@@ -11,11 +11,11 @@ const libreConvert = promisify(libre.convert);
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5002;
 
 // Middlewares
 app.use(cors({
-  origin: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : false
+  origin: process.env.NODE_ENV === 'development' ? 'http://localhost:5001' : false
 }));
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
